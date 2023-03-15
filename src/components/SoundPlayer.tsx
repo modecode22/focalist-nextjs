@@ -1,12 +1,15 @@
 "use client"
 
 import { useRef, useState } from "react";
-
+import * as Slider from "@radix-ui/react-slider";
+import Image, { StaticImageData } from "next/image";
+import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs";
 type AudioPlayerProps = {
   src: string;
+  img: StaticImageData;
 };
 
-const SoundPlayer: React.FC<AudioPlayerProps> = ({ src }) => {
+const SoundPlayer: React.FC<AudioPlayerProps> = ({ src , img }) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -23,9 +26,9 @@ const SoundPlayer: React.FC<AudioPlayerProps> = ({ src }) => {
   };
 
   const handleRestart = () => {
-     if (audioRef.current) {
-    audioRef.current.currentTime = 0;
-     }
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+    }
     handlePlay();
   };
 
@@ -33,35 +36,81 @@ const SoundPlayer: React.FC<AudioPlayerProps> = ({ src }) => {
     setCurrentTime(audioRef.current?.currentTime ?? 0);
   };
 
-const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  const newVolume = Number(event.target.value);
-  setVolume(newVolume);
+  // const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const newVolume = Number(event.target.value);
+  //   setVolume(newVolume);
+  //      if (audioRef.current) {
+  //        audioRef.current.volume = newVolume / 100
+  //      }
+  // };
+
+   const handleVolumeChange = (value: number[]) => {
+     const thevalue = value[0];
+     setVolume(thevalue);
      if (audioRef.current) {
-       audioRef.current.volume = newVolume / 100;
+       audioRef.current.volume = thevalue / 100;
      }
-};
+   };
+
   return (
-    <div>
+    <section
+      className={`border duration-100 transition-all border-main100/40 group relative ${
+        isPlaying ? "shadow-md shadow-main200/50 " : "grayscale"
+      } hover:grayscale-[0.5] select-none cursor-pointer relative flex flex-col justify-end items-center w-20 aspect-square  rounded-full p-2 gap-2 bg-black/20`}
+    >
+      {!isPlaying ? (
+        <div
+          onClick={handlePlay}
+          className={`hidden duration-100 transition-all  w-full h-full group-hover:flex justify-center items-center absolute`}
+        >
+          <BsFillPlayFill className="w-10 h-10 z-50 " />
+        </div>
+      ) : (
+        <div
+          onClick={handlePause}
+          className={`hidden duration-100 transition-all  w-full h-full group-hover:flex justify-center items-center absolute`}
+        >
+          <BsFillPauseFill className="w-10 h-10 z-50 " />
+        </div>
+      )}
+
       <audio ref={audioRef} src={src} onTimeUpdate={handleTimeUpdate} />
-      <div>
-        <button onClick={isPlaying ? handlePause : handlePlay}>
-          {isPlaying ? "Pause" : "Play"}
-        </button>
-        <button onClick={handleRestart}>Restart</button>
-        <div>
-          <label htmlFor="volume">Volume:</label>
-          <input
+      <Image
+        onClick={isPlaying ? handlePause : handlePlay}
+        className={`object-cover  rounded-full duration-200`}
+        src={img}
+        alt=""
+        fill
+      />
+      <div className="w-full">
+        <div className="w-full">
+          <Slider.Root
+            className="relative  flex items-center select-none touch-none w-full h-2"
+            defaultValue={[50]}
+            max={100}
+            step={1}
+            value={[volume]}
+            onValueChange={handleVolumeChange}
+            aria-label="Volume"
+          >
+            <Slider.Track className="bg-black/50 relative grow rounded-full h-2">
+              <Slider.Range className="absolute bg-white rounded-full h-full" />
+            </Slider.Track>
+            <Slider.Thumb className="block w-5 h-5 bg-white shadow-[0_2px_10px] shadow-black/80 rounded-[10px] hover:bg-main100 focus:outline-none focus:shadow-[0_0_0_5px] focus:shadow-black/60" />
+          </Slider.Root>
+
+          {/* <input
             id="volume"
             type="range"
             min="0"
             max="100"
             value={volume}
             onChange={handleVolumeChange}
-          />
+          /> */}
         </div>
       </div>
-      <div>Current Time: {currentTime.toFixed(2)}</div>
-    </div>
+      {/* <div>Current Time: {currentTime.toFixed(2)}</div> */}
+    </section>
   );
 };
 
