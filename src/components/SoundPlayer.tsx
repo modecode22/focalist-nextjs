@@ -54,9 +54,11 @@ const SoundPlayer: React.FC<AudioPlayerProps> = ({ src , img }) => {
 
   return (
     <section
-      className={`border duration-100 transition-all border-main100/40 group relative ${
-        isPlaying ? "shadow-md shadow-main200/50 " : "grayscale"
-      } hover:grayscale-[0.5] select-none cursor-pointer relative flex flex-col justify-end items-center w-20 aspect-square  rounded-full p-2 gap-2 bg-black/20`}
+      className={`border duration-200 transition-all border-main100/40 group relative ${
+        isPlaying
+          ? "shadow-md hover:brightness-110 shadow-main200/50 "
+          : "grayscale hover:grayscale-[0.5]"
+      }  active:grayscale-0 select-none cursor-pointer relative flex flex-col justify-end items-center w-20 aspect-square  rounded-full p-2 gap-2 bg-black/20`}
     >
       {!isPlaying ? (
         <div
@@ -74,7 +76,7 @@ const SoundPlayer: React.FC<AudioPlayerProps> = ({ src , img }) => {
         </div>
       )}
 
-      <audio ref={audioRef} src={src} onTimeUpdate={handleTimeUpdate} />
+      <audio ref={audioRef} src={src} onTimeUpdate={handleTimeUpdate} loop />
       <Image
         onClick={isPlaying ? handlePause : handlePlay}
         className={`object-cover  rounded-full duration-200`}
@@ -84,20 +86,22 @@ const SoundPlayer: React.FC<AudioPlayerProps> = ({ src , img }) => {
       />
       <div className="w-full">
         <div className="w-full">
-          <Slider.Root
-            className="relative  flex items-center select-none touch-none w-full h-2"
-            defaultValue={[50]}
-            max={100}
-            step={1}
-            value={[volume]}
-            onValueChange={handleVolumeChange}
-            aria-label="Volume"
-          >
-            <Slider.Track className="bg-black/50 relative grow rounded-full h-2">
-              <Slider.Range className="absolute bg-white rounded-full h-full" />
-            </Slider.Track>
-            <Slider.Thumb className="block w-5 h-5 bg-white shadow-[0_2px_10px] shadow-black/80 rounded-[10px] hover:bg-main100 focus:outline-none focus:shadow-[0_0_0_5px] focus:shadow-black/60" />
-          </Slider.Root>
+          {isPlaying && (
+            <Slider.Root
+              className="relative  flex items-center select-none touch-none w-full h-2"
+              defaultValue={[50]}
+              max={100}
+              step={1}
+              value={[volume]}
+              onValueChange={handleVolumeChange}
+              aria-label="Volume"
+            >
+              <Slider.Track className="bg-black/50 relative grow rounded-full h-2">
+                <Slider.Range className="absolute bg-white rounded-full h-full" />
+              </Slider.Track>
+              <Slider.Thumb className="block w-5 h-5 bg-white shadow-[0_2px_10px] shadow-black/80 rounded-[10px] hover:bg-main100 focus:outline-none focus:shadow-[0_0_0_5px] focus:shadow-black/60" />
+            </Slider.Root>
+          )}
 
           {/* <input
             id="volume"
