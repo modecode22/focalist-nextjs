@@ -21,15 +21,15 @@ export default function Home() {
             {/* <section className="flex items-center gap-5">
               <button></button>
             </section> */}
-            <ScrollArea className="h-full mb-48 max-w-md w-full  rounded-md border border-font/10  p-4">
+            <ScrollArea className=" h-full mb-48 max-w-md w-full  rounded-md border border-font/10  p-4">
               <main className="flex flex-col  items-center w-full h-full gap-2">
-                <Task />
-                <Task />
-                <Task />
-                <Task />
-                <Task />
-                <Task />
                 <AddTask />
+                <Task />
+                <Task />
+                <Task />
+                <Task />
+                <Task />
+                <Task />
               </main>
             </ScrollArea>
           </main>

@@ -20,9 +20,11 @@ const SoundBtn = () => {
         </div>
       </button>
       <div
-        className={`duration-200 transition-all ${open ? "left-0" : "-left-32"} mt-10 w-28 h-screen fixed  top-0`}
+        className={`duration-200 transition-all ${
+          open ? "left-0" : "-left-32"
+        } mt-10 w-28 h-screen fixed  top-0`}
       >
-        <ScrollArea className=" w-28 h-screen fixed left-0 top-0   flex justify-center items-center bg-dark200  ">
+        <ScrollArea className=" w-28 h-screen absolute left-0 top-0   flex justify-center items-center bg-dark200  ">
           <Sounds />
         </ScrollArea>
       </div>
