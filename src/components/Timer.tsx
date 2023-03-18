@@ -36,11 +36,10 @@ const Timer = () => {
   const minutes = Math.floor(seconds / 60);
   const formattedSeconds = `${seconds % 60}`.padStart(2, "0");
 const progressWidth = 100-(seconds * 100) / session;
-console.log(progressWidth);
 
   return (
     <>
-      <section className="duration-100 transition-all group absolute overflow-hidden w-[128px] h-12 bg-black/80  bottom-2 right-1/2 left-1/2 -translate-x-[50%] rounded-xl backdrop-blur-md shadow-black shadow-sm">
+      <section className="duration-100 transition-all group absolute overflow-hidden w-[128px] h-12 bg-black/80  bottom-5 right-1/2 left-1/2 -translate-x-[50%] rounded-xl backdrop-blur-md shadow-black shadow-sm">
         <div
           style={{ width: `${progressWidth}%` }}
           className="duration-100 transition-all absolute bg-gradient-to-br from-main100 to-main200  h-full rounded-sm"

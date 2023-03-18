@@ -1,12 +1,21 @@
 "use client"
 import { CircularProgressbar } from 'react-circular-progressbar';
 
-const CircleForTask = () => {
+
+
+interface Props {
+  completedSubTasks: number;
+  totalSubTasks: number;
+}
+
+const CircleForTask = ({ completedSubTasks , totalSubTasks} : Props) => {
+    const value =  (completedSubTasks * 100)/totalSubTasks 
+
   return (
     <>
       <CircularProgressbar
-        className={"fill-white font-bold stroke-main100 "}
-        value={50}
+        className={"fill-white font-bold stroke-main100  "}
+        value={value}
         strokeWidth={15}
       />
     </>
@@ -14,3 +23,5 @@ const CircleForTask = () => {
 }
 
 export default CircleForTask
+
+
