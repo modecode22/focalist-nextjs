@@ -14,7 +14,9 @@ const CircleForTask = ({ completedSubTasks , totalSubTasks} : Props) => {
   return (
     <>
       <CircularProgressbar
-        className={"fill-white font-bold stroke-main100  "}
+        className={`fill-white font-bold ${
+          value === 100 ? "stroke-main100" : "stroke-main100/50"
+        }  `}
         value={value}
         strokeWidth={15}
       />

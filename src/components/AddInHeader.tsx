@@ -1,5 +1,6 @@
 "use client"
 import { MdAdd } from 'react-icons/md';
+import AddTaskForm from './AddTaskForm';
 import { Dialog, DialogContent, DialogTrigger } from './ui/dialog';
 
 const AddInHeader = () => {
@@ -16,7 +17,7 @@ const AddInHeader = () => {
           </button>
         </DialogTrigger>
         <DialogContent>
-          <div></div>
+          <AddTaskForm />
         </DialogContent>
       </Dialog>
     </>

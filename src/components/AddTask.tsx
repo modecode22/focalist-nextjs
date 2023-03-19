@@ -1,4 +1,5 @@
 import { MdOutlineAdd } from "react-icons/md"
+import AddTaskForm from "./AddTaskForm";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 
 const AddTask = () => {
@@ -12,7 +13,7 @@ const AddTask = () => {
           </section>
         </DialogTrigger>
         <DialogContent>
-          <div></div>
+          <AddTaskForm />
         </DialogContent>
       </Dialog>
     </>

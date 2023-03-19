@@ -76,8 +76,9 @@ export default function Home() {
   return (
     <>
       <Timer />
-      <main className="flex  items-center justify-center w-full h-full">
-        <main className="col-span-6 flex flex-col  items-center w-full h-full gap-5 p-5">
+      <main className="flex justify-center items-center w-full h-full">
+
+        <main className=" flex flex-col  items-center w-full h-full gap-5 p-5">
           <header className="flex justify-between items-center px-5 max-w-md w-full gap-60">
             <h1 className="font-sans text-xl">Today Tasks</h1>
             <MainNav />
@@ -86,7 +87,7 @@ export default function Home() {
             {/* <section className="flex items-center gap-5">
               <button></button>
             </section> */}
-            <ScrollArea className=" h-full mb-48 max-w-md w-full  rounded-md border border-font/10  p-4">
+            <ScrollArea className=" h-full max-h-80 max-w-md w-full  rounded-md   p-4">
               <main className="flex flex-col  items-center w-full h-full gap-2">
                 <AddTask />
                 {tasks.map((task) => (
@@ -96,7 +97,6 @@ export default function Home() {
             </ScrollArea>
           </main>
         </main>
-        <main></main>
       </main>
     </>
   );

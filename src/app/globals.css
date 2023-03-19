@@ -24,7 +24,7 @@
 
 .CircularProgressbar .CircularProgressbar-text {
   stroke: none;
-  font-size: 2.7rem;
+  font-size: 1.7rem;
   dominant-baseline: middle;
   text-anchor: middle;
 }
